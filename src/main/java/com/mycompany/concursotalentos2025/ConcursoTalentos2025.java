@@ -15,12 +15,12 @@ import java.util.List;
  */
 public class ConcursoTalentos2025 extends JFrame {
     
-    // Estruturas de dados para armazenar os candidatos
+    // Dados candidatos
     private Stack<Candidato> pilhaMulheres = new Stack<>();
     private Queue<Candidato> filaHomens = new LinkedList<>();
     private List<Candidato> todosCandidatos = new ArrayList<>();
     
-    // Componentes da interface
+    // Interface componentes
     private JTextField txtNome, txtIdade, txtSexo, txtPais, txtGeneroMusical, txtGeneroFiltro;
     private JTextArea txtAreaResultado;
     private JButton btnCadastrar, btnListar, btnMediaGeral, btnCandidataMaisJovem;
@@ -33,12 +33,12 @@ public class ConcursoTalentos2025 extends JFrame {
         setSize(900, 700);
         setLocationRelativeTo(null);
         
-        // Estruturas de dados para armazenar os candidatos
+        // Dados candidatos
         pilhaMulheres = new Stack<>();
         filaHomens = new LinkedList<>();
         todosCandidatos = new ArrayList<>();
         
-        // Adicionando candidatos de exemplo
+        // Candidatos exemplo
         Candidato c1 = new Candidato("Anne Beckman", "22", "F", "Austrália", "pop");
         Candidato c2 = new Candidato("Luis Peres", "23", "M", "Brasil", "pop");
         Candidato c3 = new Candidato("Peter Jones", "18", "M", "USA", "rock");
@@ -47,7 +47,7 @@ public class ConcursoTalentos2025 extends JFrame {
         Candidato c6 = new Candidato("Luoise Cherac", "18", "F", "França", "pop");
         Candidato c7 = new Candidato("Leonor Perez", "32", "F", "México", "salsa");
         
-        // Adicionando à estrutura apropriada
+        // Adiciona estrutura
         pilhaMulheres.push(c1);
         filaHomens.offer(c2);
         filaHomens.offer(c3);
@@ -56,7 +56,7 @@ public class ConcursoTalentos2025 extends JFrame {
         pilhaMulheres.push(c6);
         pilhaMulheres.push(c7);
         
-        // Adicionando à lista de todos os candidatos
+        // Adiciona lista
         todosCandidatos.add(c1);
         todosCandidatos.add(c2);
         todosCandidatos.add(c3);
@@ -68,7 +68,7 @@ public class ConcursoTalentos2025 extends JFrame {
         // Painel principal
         JPanel mainPanel = new JPanel(new BorderLayout());
         
-        // Painel de entrada de dados
+        // Painel entrada
         JPanel inputPanel = new JPanel(new GridLayout(5, 2, 5, 5));
         inputPanel.setBorder(BorderFactory.createTitledBorder("Dados do Candidato"));
         
@@ -92,7 +92,7 @@ public class ConcursoTalentos2025 extends JFrame {
         txtGeneroMusical = new JTextField();
         inputPanel.add(txtGeneroMusical);
         
-        // Painel de botões
+        // Painel botões
         JPanel buttonPanel = new JPanel(new GridLayout(2, 4, 5, 5));
         buttonPanel.setBorder(BorderFactory.createTitledBorder("Operações"));
         
@@ -115,7 +115,7 @@ public class ConcursoTalentos2025 extends JFrame {
         buttonPanel.add(btnRetirarPilha);
         buttonPanel.add(btnRetirarFila);
         
-        // Painel de filtro por gênero
+        // Painel filtro
         JPanel filterPanel = new JPanel(new FlowLayout());
         filterPanel.setBorder(BorderFactory.createTitledBorder("Filtrar por Gênero Musical"));
         
@@ -128,7 +128,7 @@ public class ConcursoTalentos2025 extends JFrame {
         filterPanel.add(btnFiltrarGenero);
         filterPanel.add(btnAutores);
         
-        // Área de resultado - Aumentando o tamanho
+        // Área resultado
         txtAreaResultado = new JTextArea();
         txtAreaResultado.setEditable(false);
         txtAreaResultado.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -136,12 +136,12 @@ public class ConcursoTalentos2025 extends JFrame {
         scrollPane.setBorder(BorderFactory.createTitledBorder("Resultados"));
         scrollPane.setPreferredSize(new Dimension(800, 300));
         
-        // Adicionando os painéis ao painel principal
+        // Adiciona painéis
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(inputPanel, BorderLayout.CENTER);
         topPanel.add(buttonPanel, BorderLayout.SOUTH);
         
-        // Painel para os painéis superiores
+        // Painéis superiores
         JPanel upperPanel = new JPanel(new BorderLayout());
         upperPanel.add(topPanel, BorderLayout.CENTER);
         upperPanel.add(filterPanel, BorderLayout.SOUTH);
@@ -149,10 +149,10 @@ public class ConcursoTalentos2025 extends JFrame {
         mainPanel.add(upperPanel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         
-        // Adicionando o painel principal à janela
+        // Adiciona janela
         add(mainPanel);
         
-        // Adicionando os listeners aos botões
+        // Adiciona listeners
         btnCadastrar.addActionListener(e -> cadastrarCandidato());
         btnListar.addActionListener(e -> listarCandidatos());
         btnMediaGeral.addActionListener(e -> calcularMediaGeral());
@@ -173,13 +173,13 @@ public class ConcursoTalentos2025 extends JFrame {
             String pais = txtPais.getText().trim();
             String generoMusical = txtGeneroMusical.getText().trim();
             
-            // Validação dos campos
+            // Valida campos
             if (nome.isEmpty() || idadeStr.isEmpty() || sexo.isEmpty() || pais.isEmpty() || generoMusical.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos os campos são obrigatórios!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            // Validação da idade
+            // Valida idade
             int idade;
             try {
                 idade = Integer.parseInt(idadeStr);
@@ -192,26 +192,26 @@ public class ConcursoTalentos2025 extends JFrame {
                 return;
             }
             
-            // Validação do sexo
+            // Valida sexo
             if (!sexo.equals("F") && !sexo.equals("M")) {
                 JOptionPane.showMessageDialog(this, "Sexo deve ser F ou M!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            // Criando o candidato
+            // Cria candidato
             Candidato candidato = new Candidato(nome, idadeStr, sexo, pais, generoMusical);
             
-            // Adicionando à estrutura apropriada
+            // Adiciona estrutura
             if (sexo.equals("F")) {
                 pilhaMulheres.push(candidato);
             } else {
                 filaHomens.offer(candidato);
             }
             
-            // Adicionando à lista de todos os candidatos
+            // Adiciona lista
             todosCandidatos.add(candidato);
             
-            // Limpando os campos
+            // Limpa campos
             txtNome.setText("");
             txtIdade.setText("");
             txtSexo.setText("");
@@ -231,7 +231,7 @@ public class ConcursoTalentos2025 extends JFrame {
             return;
         }
         
-        // Separando homens e mulheres
+        // Separa gêneros
         List<Candidato> mulheres = new ArrayList<>();
         List<Candidato> homens = new ArrayList<>();
         
@@ -243,11 +243,11 @@ public class ConcursoTalentos2025 extends JFrame {
             }
         }
         
-        // Ordenando por nome (Bubble Sort)
+        // Ordena nomes
         ordenarPorNome(mulheres);
         ordenarPorNome(homens);
         
-        // Construindo o resultado
+        // Constrói resultado
         StringBuilder resultado = new StringBuilder();
         resultado.append("=== CANDIDATAS (ORDEM ALFABÉTICA) ===\n\n");
         
@@ -277,7 +277,7 @@ public class ConcursoTalentos2025 extends JFrame {
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (lista.get(j).getNome().compareToIgnoreCase(lista.get(j + 1).getNome()) > 0) {
-                    // Troca
+                    // Troca valores
                     Candidato temp = lista.get(j);
                     lista.set(j, lista.get(j + 1));
                     lista.set(j + 1, temp);

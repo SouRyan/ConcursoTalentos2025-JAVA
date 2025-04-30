@@ -5,29 +5,32 @@
 package com.mycompany.concursotalentos2025;
 
 /**
- *
- * @author Thunder
+ * Classe derivada
  */
 public class Candidato extends Pessoa {
+    // Dados específicos
     private String pais;
     private String generoMusical;
     
+    // Construtor derivado
     public Candidato(String nome, String idade, String sexo, String pais, String generoMusical) {
         super(nome, idade, sexo);
         this.pais = pais;
         this.generoMusical = generoMusical;
     }
     
+    // Getters específicos
     public String getPais() {
         return pais;
     }
     
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-    
     public String getGeneroMusical() {
         return generoMusical;
+    }
+    
+    // Setters específicos
+    public void setPais(String pais) {
+        this.pais = pais;
     }
     
     public void setGeneroMusical(String generoMusical) {
@@ -36,10 +39,8 @@ public class Candidato extends Pessoa {
     
     @Override
     public String toString() {
-        return "Nome: " + getNome() + 
-               ", Idade: " + getIdade() + 
-               ", Sexo: " + getSexo() + 
-               ", País: " + pais + 
-               ", Gênero Musical: " + generoMusical;
+        return super.toString() + "\n" +
+               "País: " + pais + "\n" +
+               "Gênero Musical: " + generoMusical;
     }
 }
